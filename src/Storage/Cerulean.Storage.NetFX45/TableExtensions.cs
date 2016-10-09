@@ -24,7 +24,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to insert.</param>
 		/// <returns>A <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		public static TableResult Insert<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static TableResult InsertEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 
@@ -40,7 +40,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to insert.</param>
 		/// <returns>A <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		public static async Task<TableResult> InsertAsync<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static async Task<TableResult> InsertEntityAsync<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 
@@ -58,8 +58,8 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to insert or merge.</param>
 		/// <returns>A <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> or <paramref name="entity"/> is null.</exception>
-		/// <seealso cref="Merge{T}(CloudTable, T)"/>
-		public static TableResult InsertOrMerge<T>(this CloudTable table, T entity) where T : ITableEntity
+		/// <seealso cref="MergeEntity{T}(CloudTable, T)"/>
+		public static TableResult InsertOrMergeEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -77,8 +77,8 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to insert or merge.</param>
 		/// <returns>A <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		/// <seealso cref="MergeAsync{T}(CloudTable, T)"/>
-		public static async Task<TableResult> InsertOrMergeAsync<T>(this CloudTable table, T entity) where T : ITableEntity
+		/// <seealso cref="MergeEntityAsync{T}(CloudTable, T)"/>
+		public static async Task<TableResult> InsertOrMergeEntityAsync<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -101,8 +101,8 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to insert or replace.</param>
 		/// <returns>A <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> or <paramref name="entity"/> is null.</exception>
-		/// <seealso cref="Replace{T}(CloudTable, T)"/>
-		public static TableResult InsertOrReplace<T>(this CloudTable table, T entity) where T : ITableEntity
+		/// <seealso cref="ReplaceEntity{T}(CloudTable, T)"/>
+		public static TableResult InsertOrReplaceEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -120,7 +120,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to insert or replace.</param>
 		/// <returns>A <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		public static async Task<TableResult> InsertOrReplaceAsync<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static async Task<TableResult> InsertOrReplaceEntityAsync<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -148,7 +148,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to merge.</param>
 		/// <returns>A <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> or <paramref name="entity"/> is null.</exception>
-		public static TableResult Merge<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static TableResult MergeEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -169,7 +169,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to merge.</param>
 		/// <returns>A <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		public static async Task<TableResult> MergeAsync<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static async Task<TableResult> MergeEntityAsync<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -195,7 +195,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to replace.</param>
 		/// <returns>A <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> or <paramref name="entity"/> is null.</exception>
-		public static TableResult Replace<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static TableResult ReplaceEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -217,7 +217,7 @@ namespace Cerulean.Storage
 		/// <returns>A <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static async Task<TableResult> ReplaceAsync<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static async Task<TableResult> ReplaceEntityAsync<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -241,9 +241,9 @@ namespace Cerulean.Storage
 		/// <returns>Null if the entity was not found, otherwise a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> or <paramref name="entity"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static T Retrieve<T>(this CloudTable table, T entity) where T : class, ITableEntity
+		public static T RetrieveEntity<T>(this CloudTable table, T entity) where T : class, ITableEntity
 		{
-			return Retrieve<T>(table, entity.PartitionKey, entity.RowKey);
+			return RetrieveEntity<T>(table, entity.PartitionKey, entity.RowKey);
 		}
 
 		/// <summary>
@@ -256,7 +256,7 @@ namespace Cerulean.Storage
 		/// <returns>Null if the entity was not found, otherwise a <see cref="Task{TResult}"/> whose result is the retrieved entity.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static T Retrieve<T>(CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
+		public static T RetrieveEntity<T>(CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (partitionKey == null) throw new ArgumentNullException(nameof(partitionKey));
@@ -279,9 +279,9 @@ namespace Cerulean.Storage
 		/// <returns>Null if the entity was not found, otherwise a <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> or <paramref name="entity"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static async Task<T> RetrieveAsync<T>(this CloudTable table, T entity) where T : class, ITableEntity
+		public static async Task<T> RetrieveEntityAsync<T>(this CloudTable table, T entity) where T : class, ITableEntity
 		{
-			return await RetrieveAsync<T>(table, entity.PartitionKey, entity.RowKey).ConfigureAwait(false);
+			return await RetrieveEntityAsync<T>(table, entity.PartitionKey, entity.RowKey).ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -294,7 +294,7 @@ namespace Cerulean.Storage
 		/// <returns>Null if the entity was not found, otherwise a <see cref="Task{TResult}"/> whose result is the retrieved entity.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static async Task<T> RetrieveAsync<T>(CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
+		public static async Task<T> RetrieveEntityAsync<T>(CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (partitionKey == null) throw new ArgumentNullException(nameof(partitionKey));
@@ -320,7 +320,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to delete.</param>
 		/// <returns>A <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		public static TableResult Delete<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static TableResult DeleteEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 
@@ -336,7 +336,7 @@ namespace Cerulean.Storage
 		/// <param name="entity">The entity to delete.</param>
 		/// <returns>A <see cref="Task{TResult}"/> whose result is a <see cref="TableResult"/> with the result of the operation.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/> is null.</exception>
-		public static async Task<TableResult> DeleteAsync<T>(this CloudTable table, T entity) where T : ITableEntity
+		public static async Task<TableResult> DeleteEntityAsync<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 

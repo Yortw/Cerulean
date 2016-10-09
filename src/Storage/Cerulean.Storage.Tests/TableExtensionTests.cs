@@ -29,9 +29,9 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.Insert(entity);
+			table.InsertEntity(entity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -53,9 +53,9 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertAsync(entity);
+			await table.InsertEntityAsync(entity);
 
-			var storedEntity = await table.RetrieveAsync<TestTableEntity>(entity);
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -77,9 +77,9 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.InsertOrReplace(entity);
+			table.InsertOrReplaceEntity(entity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -101,9 +101,9 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertOrReplaceAsync(entity);
+			await table.InsertOrReplaceEntityAsync(entity);
 
-			var storedEntity = await table.RetrieveAsync<TestTableEntity>(entity);
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -125,7 +125,7 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.InsertOrReplace(entity);
+			table.InsertOrReplaceEntity(entity);
 
 			var updateEntity = new TestTableEntity()
 			{
@@ -133,9 +133,9 @@ namespace Cerulean.Storage.Tests
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			table.InsertOrReplace(updateEntity);
+			table.InsertOrReplaceEntity(updateEntity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual(null, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
@@ -157,7 +157,7 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertOrReplaceAsync(entity);
+			await table.InsertOrReplaceEntityAsync(entity);
 
 			var updateEntity = new TestTableEntity()
 			{
@@ -165,9 +165,9 @@ namespace Cerulean.Storage.Tests
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			await table.InsertOrReplaceAsync(updateEntity);
+			await table.InsertOrReplaceEntityAsync(updateEntity);
 
-			var storedEntity = await table.RetrieveAsync<TestTableEntity>(entity);
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.AreEqual(null, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
@@ -189,9 +189,9 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.InsertOrMerge(entity);
+			table.InsertOrMergeEntity(entity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -213,9 +213,9 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertOrMergeAsync(entity);
+			await table.InsertOrMergeEntityAsync(entity);
 
-			var storedEntity = await table.RetrieveAsync<TestTableEntity>(entity);
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -237,7 +237,7 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.InsertOrMerge(entity);
+			table.InsertOrMergeEntity(entity);
 
 			var updateEntity = new TestTableEntity()
 			{
@@ -245,9 +245,9 @@ namespace Cerulean.Storage.Tests
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			table.InsertOrMerge(updateEntity);
+			table.InsertOrMergeEntity(updateEntity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual((byte)1, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -269,7 +269,7 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertOrMergeAsync(entity);
+			await table.InsertOrMergeEntityAsync(entity);
 
 			var updateEntity = new TestTableEntity()
 			{
@@ -277,9 +277,9 @@ namespace Cerulean.Storage.Tests
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			await table.InsertOrMergeAsync(updateEntity);
+			await table.InsertOrMergeEntityAsync(updateEntity);
 
-			var storedEntity = await table.RetrieveAsync<TestTableEntity>(entity);
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.AreEqual((byte)1, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
@@ -301,11 +301,11 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.Insert(entity);
+			table.InsertEntity(entity);
 
-			table.Delete<TestTableEntity>(entity);
+			table.DeleteEntity<TestTableEntity>(entity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.IsNull(storedEntity);
 		}
 
@@ -325,10 +325,10 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertAsync(entity);
-			await table.DeleteAsync<TestTableEntity>(entity);
+			await table.InsertEntityAsync(entity);
+			await table.DeleteEntityAsync<TestTableEntity>(entity);
 
-			var storedEntity = await table.RetrieveAsync<TestTableEntity>(entity);
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.IsNull(storedEntity);
 		}
 
@@ -348,7 +348,7 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.Insert(entity);
+			table.InsertEntity(entity);
 
 			var updateEntity = new TestTableEntity()
 			{
@@ -356,9 +356,9 @@ namespace Cerulean.Storage.Tests
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			table.Merge(updateEntity);
+			table.MergeEntity(updateEntity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual((byte)1, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(TestEnum.TestEnumValue2, storedEntity.NullableTestEnum);
@@ -380,16 +380,16 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertAsync(entity);
+			await table.InsertEntityAsync(entity);
 			var updateEntity = new TestTableEntity()
 			{
 				PartitionKey = entity.PartitionKey,
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			await table.MergeAsync(updateEntity);
+			await table.MergeEntityAsync(updateEntity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual((byte)1, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(TestEnum.TestEnumValue2, storedEntity.NullableTestEnum);
@@ -411,7 +411,7 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			table.Insert(entity);
+			table.InsertEntity(entity);
 
 			var updateEntity = new TestTableEntity()
 			{
@@ -419,9 +419,9 @@ namespace Cerulean.Storage.Tests
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			table.Replace(updateEntity);
+			table.ReplaceEntity(updateEntity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual(null, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
@@ -443,16 +443,16 @@ namespace Cerulean.Storage.Tests
 			table.DeleteIfExists();
 			table.Create();
 
-			await table.InsertAsync(entity);
+			await table.InsertEntityAsync(entity);
 			var updateEntity = new TestTableEntity()
 			{
 				PartitionKey = entity.PartitionKey,
 				RowKey = entity.RowKey,
 				TestEnum = TestEnum.None
 			};
-			await table.ReplaceAsync(updateEntity);
+			await table.ReplaceEntityAsync(updateEntity);
 
-			var storedEntity = table.Retrieve<TestTableEntity>(entity);
+			var storedEntity = table.RetrieveEntity<TestTableEntity>(entity);
 			Assert.AreEqual(null, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
