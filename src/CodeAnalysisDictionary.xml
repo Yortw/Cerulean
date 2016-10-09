@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+	<Words>
+		<Recognized>
+			<Word>Mc</Word>
+			<Word>Streamy</Word>
+		</Recognized>
+	</Words>
+	<Acronyms>
+		<CasingExceptions>
+			<Acronym>iOS</Acronym>
+			<Acronym>WPSL</Acronym>
+		</CasingExceptions>
+	</Acronyms>
+</Dictionary>
