@@ -13,10 +13,10 @@ Currently;
 
 ## Nuget Support
 
-Install the Nuget package like this;
+Install the releant Nuget package;
 
 ```powershell
-    PM> Install-Package Cerulean
+    PM> Install-Package Cerulean.Storage
 ```
 
 [![NuGet Badge](https://buildstats.info/nuget/cerulean)](https://www.nuget.org/packages/cerulean/)

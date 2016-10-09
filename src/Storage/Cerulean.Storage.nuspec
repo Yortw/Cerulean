@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Cerulean.Storage</id>
+        <version>1.0.0.0</version>
+        <title>Cerulean.Storage</title>
+        <authors>Troy Willmot</authors>
+        <owners>Yortw</owners>
+        <licenseUrl>https://github.com/Yortw/Cerulean/blob/master/LICENSE.md</licenseUrl>
+        <projectUrl>https://github.com/Yortw/Cerulean</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/Yortw/Cerulean/master/CeruleanIcon.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A .Net library for dealing with Azure storage.</description>
+        <copyright>Copyright 2016</copyright>
+        <language>en-AU</language>
+        <tags>.net45 azure storage cerulean entity table</tags>
+        <dependencies>
+            <group>
+                <dependency id="WindowsAzure.Storage" version="7.2.1" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Cerulean.Storage.NetFX45\bin\Release\Cerulean.Storage.NetFX45.dll" target="lib\net45\Cerulean.Storage.NetFX45.dll" />
+        <file src="Cerulean.Storage.NetFX45\bin\Release\Cerulean.Storage.NetFX45.pdb" target="lib\net45\Cerulean.Storage.NetFX45.pdb" />
+        <file src="Cerulean.Storage.NetFX45\bin\Release\Cerulean.Storage.NetFX45.XML" target="lib\net45\Cerulean.Storage.NetFX45.XML" />
+        <file src="**\*.cs" target="src" />
+    </files>
+</package>
