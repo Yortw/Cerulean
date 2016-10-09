@@ -23,7 +23,7 @@ namespace Cerulean.Storage
 		private static TableEntityFieldSerializer _NullableDateTimeSerializer;
 		private static TableEntityFieldSerializer _NullableDateTimeOffsetSerializer;
 		private static TableEntityFieldSerializer _DecimalSerializer;
-		private static TableEntityFieldSerializer _DateTimeOffsetSerializer;
+		private static TableEntityFieldSerializer _Int16Serializer;
 
 		public static TableEntityFieldSerializer NullableByteSerializer
 		{
@@ -142,6 +142,17 @@ namespace Cerulean.Storage
 				return _DecimalSerializer ??
 				(
 					_DecimalSerializer = new DecimalTableStorageFieldSerializer()
+				);
+			}
+		}
+
+		public static TableEntityFieldSerializer Int16Serializer
+		{
+			get
+			{
+				return _Int16Serializer ??
+				(
+					_Int16Serializer = new Int16TableStorageFieldSerializer()
 				);
 			}
 		}

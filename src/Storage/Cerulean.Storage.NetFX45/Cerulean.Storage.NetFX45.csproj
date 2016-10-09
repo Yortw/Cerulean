@@ -74,11 +74,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Int16TableStorageFieldSerializer.cs" />
+    <Compile Include="NullableEnumTableStorageFieldSerializer.cs" />
     <Compile Include="EnumTableStorageFieldSerializer.cs" />
     <Compile Include="DecimalTableStorageFieldSerializer.cs" />
-    <Compile Include="NullableDateTimeTableStorageFieldSerializer.cs" />
-    <Compile Include="NullableDateTimeOffsetTableStorageFieldSerializer.cs" />
-    <Compile Include="BoolTableStorageFieldSerializer.cs" />
     <Compile Include="CustomSerializingTableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableEntityFieldSerializer.cs" />

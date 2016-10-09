@@ -61,6 +61,8 @@ namespace Cerulean.Storage
 
 			foreach (var item in objectProperties)
 			{
+				if (entityProperties.ContainsKey(item.Name)) continue;
+
 				var serializer = _Serializers[item.PropertyType];
 				var value = item.GetValue(this, null);
 				if (value != null)
