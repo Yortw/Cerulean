@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace Cerulean.Storage.Tests
 {
 	[TestClass]
-	public class CustomSerializingTableEntityTests
+	public class PrimitiveSerializingTableEntityTests
 	{
 
 		[TestMethod]
-		public void CustomSerializingTableEntity_SerializesAllTypesWhenNotNull()
+		public void PrimitiveSerializingTableEntity_SerializesAllTypesWhenNotNull()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -74,7 +74,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void CustomSerializingTableEntity_SerializesAllNullableTypesWhenNull()
+		public void PrimitiveSerializingTableEntity_SerializesAllNullableTypesWhenNull()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -124,24 +124,81 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(null, entity.TestNullableDateTimeOffset);
 			Assert.AreEqual(null, entity.TestNullableDouble);
 		}
+
+		[TestMethod]
+		public void PrimitiveSerializingTableEntity_ReplaceNullSetsNull()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+			table.Create();
+
+			var op = TableOperation.Insert(entity);
+			table.Execute(op);
+
+
+			op = TableOperation.Retrieve<TestTableEntity>(entity.PartitionKey, entity.RowKey);
+			var result = table.Execute(op);
+			var storedEntity = result.Result as TestTableEntity;
+
+			storedEntity.TestNullableByte = null;
+			op = TableOperation.Replace(storedEntity);
+			table.Execute(op);
+
+			op = TableOperation.Retrieve<TestTableEntity>(entity.PartitionKey, entity.RowKey);
+			result = table.Execute(op);
+			storedEntity = result.Result as TestTableEntity;
+
+			Assert.IsNull(storedEntity.TestNullableByte);
+		}
+
+		[TestMethod]
+		public void PrimitiveSerializingTableEntity_MergeNullDoesNotSetNull()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+			table.Create();
+
+			var op = TableOperation.Insert(entity);
+			table.Execute(op);
+
+			var entityToMerge = new TestTableEntity()
+			{
+				PartitionKey = entity.PartitionKey,
+				RowKey = entity.RowKey,
+				TestNullableBool = true,
+				ETag = "*"
+			};
+
+			op = TableOperation.Merge(entityToMerge);
+			table.Execute(op);
+
+			op = TableOperation.Retrieve<TestTableEntity>(entity.PartitionKey, entity.RowKey);
+			var result = table.Execute(op);
+			var storedEntity = result.Result as TestTableEntity;
+
+			Assert.AreEqual((byte)1, storedEntity.TestNullableByte);
+			Assert.AreEqual(true, storedEntity.TestNullableBool);
+		}
+
 	}
 
-	public class TestTableEntity : CustomSerializingTableEntity
+	public class TestTableEntity : PrimitiveSerializingTableEntity
 	{
-		public TestTableEntity() : base(new TableEntityFieldSerializer[]
-		{
-			TableEntityFieldSerializers.NullableByteSerializer,
-			TableEntityFieldSerializers.NullableDecimalSerializer,
-			TableEntityFieldSerializers.NullableFloatSerializer,
-			TableEntityFieldSerializers.NullableInt16Serializer,
-			TableEntityFieldSerializers.DecimalSerializer,
-			TableEntityFieldSerializers.Int16Serializer,
-			new EnumTableStorageFieldSerializer<TestEnum>(),
-			new NullableEnumTableStorageFieldSerializer<TestEnum>(),
-		})
-		{
 
-		}
 		public bool? TestNullableBool { get; set; }
 
 		public DateTimeOffset? TestNullableDateTimeOffset { get; set; }

@@ -79,8 +79,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CustomSerializingTableEntityTests.cs" />
-    <Compile Include="NullableTTableStorageFieldSerializerTests.cs" />
+    <Compile Include="PrimitiveSerializingTableEntityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

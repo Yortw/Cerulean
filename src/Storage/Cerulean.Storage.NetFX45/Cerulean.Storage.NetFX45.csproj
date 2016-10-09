@@ -74,15 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Int16TableStorageFieldSerializer.cs" />
-    <Compile Include="NullableEnumTableStorageFieldSerializer.cs" />
-    <Compile Include="EnumTableStorageFieldSerializer.cs" />
-    <Compile Include="DecimalTableStorageFieldSerializer.cs" />
-    <Compile Include="CustomSerializingTableEntity.cs" />
+    <Compile Include="PrimitiveSerializingTableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableEntityFieldSerializer.cs" />
-    <Compile Include="NullableTTableEntityFieldSerializer.cs" />
-    <Compile Include="TableEntityFieldSerializers.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
