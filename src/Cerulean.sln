@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Storage", "Storage", "{12776E36-D654-4A2F-83CB-53B15901B7E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cerulean.Storage.NetFX45", "Storage\Cerulean.Storage.NetFX45\Cerulean.Storage.NetFX45.csproj", "{1E2699B7-BE01-4D6A-B8A1-FCB213523373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cerulean.Storage.Tests", "Storage\Cerulean.Storage.Tests\Cerulean.Storage.Tests.csproj", "{02586EDF-BDDE-47D1-B323-F9E746F087E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E2699B7-BE01-4D6A-B8A1-FCB213523373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E2699B7-BE01-4D6A-B8A1-FCB213523373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E2699B7-BE01-4D6A-B8A1-FCB213523373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E2699B7-BE01-4D6A-B8A1-FCB213523373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02586EDF-BDDE-47D1-B323-F9E746F087E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02586EDF-BDDE-47D1-B323-F9E746F087E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02586EDF-BDDE-47D1-B323-F9E746F087E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02586EDF-BDDE-47D1-B323-F9E746F087E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E2699B7-BE01-4D6A-B8A1-FCB213523373} = {12776E36-D654-4A2F-83CB-53B15901B7E0}
+		{02586EDF-BDDE-47D1-B323-F9E746F087E1} = {12776E36-D654-4A2F-83CB-53B15901B7E0}
+	EndGlobalSection
+EndGlobal
