@@ -14,7 +14,7 @@ namespace Cerulean.Storage.Tests
 	{
 
 		[TestMethod]
-		public void TableExtensionTests_Insert_InsertsOk()
+		public void TableExtensionTests_InsertEntity_InsertsOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -38,7 +38,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_InsertAsync_InsertsOk()
+		public async Task TableExtensionTests_InsertEntityAsync_InsertsOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -62,7 +62,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_InsertOrReplace_InsertsOk()
+		public void TableExtensionTests_InsertOrReplaceEntity_InsertsOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -86,7 +86,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_InsertOrReplaceAsync_InsertsOk()
+		public async Task TableExtensionTests_InsertOrReplaceEntityAsync_InsertsOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -110,7 +110,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_InsertOrReplace_ReplacesOk()
+		public void TableExtensionTests_InsertOrReplaceEntity_ReplacesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -142,7 +142,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_InsertOrReplaceAsync_ReplacesOk()
+		public async Task TableExtensionTests_InsertOrReplaceEntityAsync_ReplacesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -174,7 +174,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_InsertOrMerge_InsertsOk()
+		public void TableExtensionTests_InsertOrMergeEntity_InsertsOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -198,7 +198,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_InsertOrMergeAsync_InsertsOk()
+		public async Task TableExtensionTests_InsertOrMergeEntityAsync_InsertsOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -222,7 +222,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_InsertOrMerge_MergesOk()
+		public void TableExtensionTests_InsertOrMergeEntity_MergesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -254,7 +254,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_InsertOrMergeAsync_MergesOk()
+		public async Task TableExtensionTests_InsertOrMergeEntityAsync_MergesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -286,7 +286,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_Delete_DeletesOk()
+		public void TableExtensionTests_DeleteEntity_DeletesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -310,7 +310,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_DeleteAsync_DeletesOk()
+		public async Task TableExtensionTests_DeleteEntityAsync_DeletesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -333,7 +333,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_Merge_MergeOk()
+		public void TableExtensionTests_MergeEntity_MergeOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -365,7 +365,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_MergeAsync_MergesOk()
+		public async Task TableExtensionTests_MergeEntityAsync_MergesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -396,7 +396,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public void TableExtensionTests_Replace_ReplacesOk()
+		public void TableExtensionTests_ReplaceEntity_ReplacesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -428,7 +428,7 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
-		public async Task TableExtensionTests_ReplaceAsync_ReplacesOk()
+		public async Task TableExtensionTests_ReplaceEntityAsync_ReplacesOk()
 		{
 			var entity = new TestTableEntity();
 			entity.PartitionKey = System.Guid.NewGuid().ToString();
@@ -456,6 +456,154 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(null, storedEntity.TestNullableByte);
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
+		}
+
+		[TestMethod]
+		public void TableExtensionTests_RetrieveEntity_RetrievesFromExistingEntity()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+			table.Create();	
+
+			table.InsertEntity(entity);
+
+			var retrievedEntity = table.RetrieveEntity(entity);
+			Assert.AreEqual(entity.RowKey, entity.RowKey);
+			Assert.AreEqual(entity.PartitionKey, entity.PartitionKey);
+			Assert.AreEqual(entity.NullableTestEnum, entity.NullableTestEnum);
+			Assert.AreEqual(entity.TestDecimal, entity.TestDecimal);
+			Assert.AreEqual(entity.TestEnum, entity.TestEnum);
+			Assert.AreEqual(entity.TestInt16, entity.TestInt16);
+			Assert.AreEqual(entity.TestNullableBool, entity.TestNullableBool);
+			Assert.AreEqual(entity.TestNullableByte, entity.TestNullableByte);
+			Assert.AreEqual(entity.TestNullableDateTime, entity.TestNullableDateTime);
+			Assert.AreEqual(entity.TestNullableDateTimeOffset, entity.TestNullableDateTimeOffset);
+			Assert.AreEqual(entity.TestNullableDecimal, entity.TestNullableDecimal);
+			Assert.AreEqual(entity.TestNullableDouble, entity.TestNullableDouble);
+			Assert.AreEqual(entity.TestNullableInt16, entity.TestNullableInt16);
+			Assert.AreEqual(entity.TestNullableInt32, entity.TestNullableInt32);
+			Assert.AreEqual(entity.TestNullableInt64, entity.TestNullableInt64);
+			Assert.AreEqual(entity.TestNullableSingle, entity.TestNullableSingle);
+		}
+
+		[TestMethod]
+		public void TableExtensionTests_RetrieveEntity_RetrievesFromPartitionAndRowKeys()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+			table.Create();
+
+			table.InsertEntity(entity);
+
+			var retrievedEntity = table.RetrieveEntity<TestTableEntity>(entity.PartitionKey, entity.RowKey);
+			Assert.AreEqual(entity.RowKey, entity.RowKey);
+			Assert.AreEqual(entity.PartitionKey, entity.PartitionKey);
+			Assert.AreEqual(entity.NullableTestEnum, entity.NullableTestEnum);
+			Assert.AreEqual(entity.TestDecimal, entity.TestDecimal);
+			Assert.AreEqual(entity.TestEnum, entity.TestEnum);
+			Assert.AreEqual(entity.TestInt16, entity.TestInt16);
+			Assert.AreEqual(entity.TestNullableBool, entity.TestNullableBool);
+			Assert.AreEqual(entity.TestNullableByte, entity.TestNullableByte);
+			Assert.AreEqual(entity.TestNullableDateTime, entity.TestNullableDateTime);
+			Assert.AreEqual(entity.TestNullableDateTimeOffset, entity.TestNullableDateTimeOffset);
+			Assert.AreEqual(entity.TestNullableDecimal, entity.TestNullableDecimal);
+			Assert.AreEqual(entity.TestNullableDouble, entity.TestNullableDouble);
+			Assert.AreEqual(entity.TestNullableInt16, entity.TestNullableInt16);
+			Assert.AreEqual(entity.TestNullableInt32, entity.TestNullableInt32);
+			Assert.AreEqual(entity.TestNullableInt64, entity.TestNullableInt64);
+			Assert.AreEqual(entity.TestNullableSingle, entity.TestNullableSingle);
+		}
+
+		[TestMethod]
+		public async Task TableExtensionTests_RetrieveEntityAsync_RetrievesFromEntity()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+			table.Create();
+
+			await table.InsertEntityAsync(entity);
+
+			var retrievedEntity = await table.RetrieveEntityAsync(entity);
+			Assert.AreEqual(entity.RowKey, entity.RowKey);
+			Assert.AreEqual(entity.PartitionKey, entity.PartitionKey);
+			Assert.AreEqual(entity.NullableTestEnum, entity.NullableTestEnum);
+			Assert.AreEqual(entity.TestDecimal, entity.TestDecimal);
+			Assert.AreEqual(entity.TestEnum, entity.TestEnum);
+			Assert.AreEqual(entity.TestInt16, entity.TestInt16);
+			Assert.AreEqual(entity.TestNullableBool, entity.TestNullableBool);
+			Assert.AreEqual(entity.TestNullableByte, entity.TestNullableByte);
+			Assert.AreEqual(entity.TestNullableDateTime, entity.TestNullableDateTime);
+			Assert.AreEqual(entity.TestNullableDateTimeOffset, entity.TestNullableDateTimeOffset);
+			Assert.AreEqual(entity.TestNullableDecimal, entity.TestNullableDecimal);
+			Assert.AreEqual(entity.TestNullableDouble, entity.TestNullableDouble);
+			Assert.AreEqual(entity.TestNullableInt16, entity.TestNullableInt16);
+			Assert.AreEqual(entity.TestNullableInt32, entity.TestNullableInt32);
+			Assert.AreEqual(entity.TestNullableInt64, entity.TestNullableInt64);
+			Assert.AreEqual(entity.TestNullableSingle, entity.TestNullableSingle);
+		}
+
+		[TestMethod]
+		public async Task TableExtensionTests_RetrieveEntityAsync_RetrievesFromPartitionAndRowKeys()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+			table.Create();
+
+			await table.InsertEntityAsync(entity);
+
+			var retrievedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity.PartitionKey, entity.RowKey);
+			Assert.AreEqual(entity.RowKey, entity.RowKey);
+			Assert.AreEqual(entity.PartitionKey, entity.PartitionKey);
+			Assert.AreEqual(entity.NullableTestEnum, entity.NullableTestEnum);
+			Assert.AreEqual(entity.TestDecimal, entity.TestDecimal);
+			Assert.AreEqual(entity.TestEnum, entity.TestEnum);
+			Assert.AreEqual(entity.TestInt16, entity.TestInt16);
+			Assert.AreEqual(entity.TestNullableBool, entity.TestNullableBool);
+			Assert.AreEqual(entity.TestNullableByte, entity.TestNullableByte);
+			Assert.AreEqual(entity.TestNullableDateTime, entity.TestNullableDateTime);
+			Assert.AreEqual(entity.TestNullableDateTimeOffset, entity.TestNullableDateTimeOffset);
+			Assert.AreEqual(entity.TestNullableDecimal, entity.TestNullableDecimal);
+			Assert.AreEqual(entity.TestNullableDouble, entity.TestNullableDouble);
+			Assert.AreEqual(entity.TestNullableInt16, entity.TestNullableInt16);
+			Assert.AreEqual(entity.TestNullableInt32, entity.TestNullableInt32);
+			Assert.AreEqual(entity.TestNullableInt64, entity.TestNullableInt64);
+			Assert.AreEqual(entity.TestNullableSingle, entity.TestNullableSingle);
 		}
 
 	}

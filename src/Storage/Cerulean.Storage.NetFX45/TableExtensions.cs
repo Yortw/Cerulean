@@ -256,7 +256,7 @@ namespace Cerulean.Storage
 		/// <returns>Null if the entity was not found, otherwise a <see cref="Task{TResult}"/> whose result is the retrieved entity.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static T RetrieveEntity<T>(CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
+		public static T RetrieveEntity<T>(this CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (partitionKey == null) throw new ArgumentNullException(nameof(partitionKey));
@@ -294,7 +294,7 @@ namespace Cerulean.Storage
 		/// <returns>Null if the entity was not found, otherwise a <see cref="Task{TResult}"/> whose result is the retrieved entity.</returns>
 		/// <exception cref="System.ArgumentNullException">Thrown if <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null.</exception>
 		/// <exception cref="StorageException">If the operation is not successful then a <see cref="StorageException"/> is thrown, but only the <see cref="RequestResult.HttpStatusCode"/> will be set.</exception>
-		public static async Task<T> RetrieveEntityAsync<T>(CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
+		public static async Task<T> RetrieveEntityAsync<T>(this CloudTable table, string partitionKey, string rowKey) where T : class, ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 			if (partitionKey == null) throw new ArgumentNullException(nameof(partitionKey));
