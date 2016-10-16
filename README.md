@@ -19,7 +19,7 @@ Install the releant Nuget package;
     PM> Install-Package Cerulean.Storage
 ```
 
-[![NuGet Badge](https://buildstats.info/nuget/cerulean)](https://www.nuget.org/packages/cerulean/)
+[![NuGet Badge](https://buildstats.info/nuget/cerulean.storage)](https://www.nuget.org/packages/cerulean.storage/)
 
 # What's In The Box?
 See the [wiki](https://github.com/Yortw/Cerulean/wiki) for contents/help.

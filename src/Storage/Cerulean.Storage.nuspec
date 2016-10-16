@@ -13,7 +13,7 @@
         <description>A .Net library for dealing with Azure storage.</description>
         <copyright>Copyright 2016</copyright>
         <language>en-AU</language>
-        <tags>.net45 azure storage cerulean entity table</tags>
+        <tags>.net45 azure storage cerulean entity table blob</tags>
         <dependencies>
             <group>
                 <dependency id="WindowsAzure.Storage" version="7.2.1" />
