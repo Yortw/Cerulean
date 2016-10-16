@@ -84,6 +84,7 @@ namespace Cerulean.Storage
 				}
 			);
 		}
+
 		/// <summary>
 		/// Uploads a stream to a block blob asynchronously.
 		/// </summary>

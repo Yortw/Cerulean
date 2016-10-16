@@ -28,7 +28,7 @@ namespace Cerulean.Storage
 		public static TableResult InsertEntity<T>(this CloudTable table, T entity) where T : ITableEntity
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
-
+			
 			return ExecuteWithMissingTableCreate((e, t) =>
 			{
 				var op = TableOperation.Insert(e, false);
