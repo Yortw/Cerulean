@@ -19,6 +19,7 @@ namespace Cerulean.Storage
 		/// <summary>
 		/// Inserts the specified entity into the table.
 		/// </summary>
+		/// <remarks>If the table does not exist it will be created.</remarks>
 		/// <typeparam name="T">The type of entity to insert.</typeparam>
 		/// <param name="table">The table to insert into.</param>
 		/// <param name="entity">The entity to insert.</param>
@@ -28,13 +29,17 @@ namespace Cerulean.Storage
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 
-			var op = TableOperation.Insert(entity, false);
-			return table.Execute(op);
+			return ExecuteWithMissingTableCreate((e, t) =>
+			{
+				var op = TableOperation.Insert(e, false);
+				return t.Execute(op);
+			}, entity, table);
 		}
 
 		/// <summary>
 		/// Inserts the specified entity into the table as an asynchronous operation.
 		/// </summary>
+		/// <remarks>If the table does not exist it will be created.</remarks>
 		/// <typeparam name="T">The type of entity to insert.</typeparam>
 		/// <param name="table">The table to insert into.</param>
 		/// <param name="entity">The entity to insert.</param>
@@ -44,8 +49,11 @@ namespace Cerulean.Storage
 		{
 			if (table == null) throw new ArgumentNullException(nameof(table));
 
-			var op = TableOperation.Insert(entity, false);
-			return await table.ExecuteAsync(op).ConfigureAwait(false);
+			return await ExecuteWithMissingTableCreateAsync((e, t) =>
+			{
+				var op = TableOperation.Insert(e, false);
+				return t.ExecuteAsync(op);
+			}, entity, table).ConfigureAwait(false);
 		}
 
 		#region InsertOrMerge
@@ -53,6 +61,9 @@ namespace Cerulean.Storage
 		/// <summary>
 		/// Inserts the specified entity into the table if it doesn't exist, otherwise performs a merge.
 		/// </summary>
+		/// <remarks><para>If the table does not exist it will be created.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
+		/// </remarks>
 		/// <typeparam name="T">The type of entity to insert or merge.</typeparam>
 		/// <param name="table">The table to insert or merge into.</param>
 		/// <param name="entity">The entity to insert or merge.</param>
@@ -65,13 +76,20 @@ namespace Cerulean.Storage
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 
 			SetMissingEtag(entity);
-			var op = TableOperation.InsertOrMerge(entity);
-			return table.Execute(op);
+
+			return ExecuteWithMissingTableCreate((e, t) =>
+			{
+				var op = TableOperation.InsertOrMerge(entity);
+				return table.Execute(op);
+			}, entity, table);
 		}
 
 		/// <summary>
 		/// Inserts the specified entity into the table if it doesn't exist, otherwise performs a merge as an asynchronous operation.
 		/// </summary>
+		/// <remarks><para>If the table does not exist it will be created.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
+		/// </remarks>
 		/// <typeparam name="T">The type of entity to insert or merge.</typeparam>
 		/// <param name="table">The table to insert or merge into.</param>
 		/// <param name="entity">The entity to insert or merge.</param>
@@ -85,8 +103,11 @@ namespace Cerulean.Storage
 
 			SetMissingEtag(entity);
 
-			var op = TableOperation.InsertOrMerge(entity);
-			return await table.ExecuteAsync(op).ConfigureAwait(false);
+			return await ExecuteWithMissingTableCreateAsync((e, t) =>
+			{
+				var op = TableOperation.InsertOrMerge(entity);
+				return table.ExecuteAsync(op);
+			}, entity, table).ConfigureAwait(false);
 		}
 
 		#endregion
@@ -96,6 +117,9 @@ namespace Cerulean.Storage
 		/// <summary>
 		/// Inserts an entity into the specified table, or if it already exists performs a replace.
 		/// </summary>
+		/// <remarks><para>If the table does not exist it will be created.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
+		/// </remarks>
 		/// <typeparam name="T">The type of entity to insert or replace.</typeparam>
 		/// <param name="table">The table to insert or replace into.</param>
 		/// <param name="entity">The entity to insert or replace.</param>
@@ -108,13 +132,20 @@ namespace Cerulean.Storage
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 
 			SetMissingEtag(entity);
-			var op = TableOperation.InsertOrReplace(entity);
-			return table.Execute(op);
+
+			return ExecuteWithMissingTableCreate((e, t) =>
+			{
+				var op = TableOperation.InsertOrReplace(entity);
+				return table.Execute(op);
+			}, entity, table);
 		}
 
 		/// <summary>
 		/// Inserts an entity into the specified table, or if it already exists performs a replace as an asynchronous operation.
 		/// </summary>
+		/// <remarks><para>If the table does not exist it will be created.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
+		/// </remarks>
 		/// <typeparam name="T">The type of entity to insert or replace.</typeparam>
 		/// <param name="table">The table to insert or replace into.</param>
 		/// <param name="entity">The entity to insert or replace.</param>
@@ -127,12 +158,15 @@ namespace Cerulean.Storage
 
 			SetMissingEtag(entity);
 
-			var op = TableOperation.InsertOrReplace(entity);
-			return await table.ExecuteAsync(op).ConfigureAwait(false);
+			return await ExecuteWithMissingTableCreateAsync((e, t) =>
+			{
+				var op = TableOperation.InsertOrReplace(entity);
+				return table.ExecuteAsync(op);
+			}, entity, table).ConfigureAwait(false);
 		}
 
 		#endregion
-		
+
 		#endregion
 
 		#region Merge
@@ -142,6 +176,7 @@ namespace Cerulean.Storage
 		/// </summary>
 		/// <remarks>
 		/// <para>A merge operation is an 'update' where only properties that are not null are updated in the table. Properties that are null are not modified in storage.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
 		/// </remarks>
 		/// <typeparam name="T">The type of entity to merge.</typeparam>
 		/// <param name="table">The table to merge into.</param>
@@ -163,6 +198,7 @@ namespace Cerulean.Storage
 		/// </summary>
 		/// <remarks>
 		/// <para>A merge operation is an 'update' where only properties that are not null are updated in the table. Properties that are null are not modified in storage.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
 		/// </remarks>
 		/// <typeparam name="T">The type of entity to merge.</typeparam>
 		/// <param name="table">The table to merge into.</param>
@@ -189,6 +225,8 @@ namespace Cerulean.Storage
 		/// </summary>
 		/// <remarks>
 		/// <para>A replace operation is an 'update' where all properties in the table are overwritten with the values from the new entity.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
+		/// <para>If the table does not exist it will be created.</para>
 		/// </remarks>
 		/// <typeparam name="T">The type of entity to replace.</typeparam>
 		/// <param name="table">The table to replace into.</param>
@@ -201,6 +239,7 @@ namespace Cerulean.Storage
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 
 			SetMissingEtag(entity);
+
 			var op = TableOperation.Replace(entity);
 			return table.Execute(op);
 		}
@@ -210,6 +249,8 @@ namespace Cerulean.Storage
 		/// </summary>
 		/// <remarks>
 		/// <para>A replace operation is an 'update' where all properties in the table are overwritten with the values from the new entity.</para>
+		/// <para>This operation requires an the <see cref="ITableEntity.ETag"/> be specified. If the etag provided is null or empty string, it is set to * causing the operation to apply regardless of the current stored etag.</para>
+		/// <para>If the table does not exist it will be created.</para>
 		/// </remarks>
 		/// <typeparam name="T">The type of entity to replace.</typeparam>
 		/// <param name="table">The table to replace into.</param>
@@ -357,5 +398,65 @@ namespace Cerulean.Storage
 			if (String.IsNullOrEmpty(entity.ETag)) entity.ETag = "*";
 		}
 
+		private static TableResult ExecuteWithMissingTableCreate(Func<ITableEntity, CloudTable, TableResult> tableEntityOperation, ITableEntity e, CloudTable t)
+		{
+			TableResult retVal = null;
+
+			int retries = 0;
+			while (retries < 3)
+			{
+				try
+				{
+					return tableEntityOperation(e, t);
+				}
+				catch (StorageException se)
+				{
+					if (retries <= 3 && IsTableNotFoundError(se))
+					{
+						t.CreateIfNotExists();
+						retries++;
+					}
+					else
+						throw;
+				}
+			}
+
+			return retVal;
+		}
+
+		private static async Task<TableResult> ExecuteWithMissingTableCreateAsync(Func<ITableEntity, CloudTable, Task<TableResult>> tableEntityOperation, ITableEntity e, CloudTable t)
+		{
+			TableResult retVal = null;
+
+			int retries = 0;
+			while (retries < 3)
+			{
+				try
+				{
+					return await tableEntityOperation(e, t).ConfigureAwait(false);
+				}
+				catch (StorageException se)
+				{
+					if (retries <= 3 && IsTableNotFoundError(se))
+					{
+						await t.CreateIfNotExistsAsync().ConfigureAwait(false);
+						retries++;
+					}
+					else
+						throw;
+				}
+			}
+
+			return retVal;
+		}
+
+		private const string TableNotFoundErrorCode = "TableNotFound";
+		private static bool IsTableNotFoundError(StorageException se)
+		{
+			var errorCode = se?.RequestInformation?.ExtendedErrorInformation.ErrorCode;
+
+			return (se?.RequestInformation?.HttpStatusCode ?? 200) == 404 
+				&& (errorCode == null || errorCode == TableNotFoundErrorCode);
+		}
 	}
 }

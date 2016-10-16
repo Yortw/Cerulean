@@ -13,6 +13,8 @@ namespace Cerulean.Storage.Tests
 	public class TableExtensionTests
 	{
 
+		#region Insert
+
 		[TestMethod]
 		public void TableExtensionTests_InsertEntity_InsertsOk()
 		{
@@ -35,6 +37,26 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
+		}
+
+		[TestMethod]
+		public void TableExtensionTests_InsertEntity_CreatesMissingTable()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+
+			table.InsertEntity(entity);
+
+			Assert.IsTrue(table.Exists());
 		}
 
 		[TestMethod]
@@ -62,6 +84,30 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
+		public async Task TableExtensionTests_InsertEntityAsync_CreatesMissingTable()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+
+			await table.InsertEntityAsync(entity);
+
+			Assert.IsTrue(await table.ExistsAsync());
+		}
+
+		#endregion
+
+		#region InsertOrReplace
+
+		[TestMethod]
 		public void TableExtensionTests_InsertOrReplaceEntity_InsertsOk()
 		{
 			var entity = new TestTableEntity();
@@ -86,6 +132,26 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
+		public void TableExtensionTests_InsertOrReplaceEntity_CreatesMissingTable()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+
+			table.InsertOrReplaceEntity(entity);
+
+			Assert.IsTrue(table.Exists());
+		}
+
+		[TestMethod]
 		public async Task TableExtensionTests_InsertOrReplaceEntityAsync_InsertsOk()
 		{
 			var entity = new TestTableEntity();
@@ -107,6 +173,26 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
+		}
+
+		[TestMethod]
+		public async Task TableExtensionTests_InsertOrReplaceEntityAsync_CreatesMissingTable()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+
+			await table.InsertOrReplaceEntityAsync(entity);
+
+			Assert.IsTrue(await table.ExistsAsync());
 		}
 
 		[TestMethod]
@@ -173,6 +259,10 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
 		}
 
+		#endregion
+
+		#region InsertOrMerge
+
 		[TestMethod]
 		public void TableExtensionTests_InsertOrMergeEntity_InsertsOk()
 		{
@@ -198,6 +288,26 @@ namespace Cerulean.Storage.Tests
 		}
 
 		[TestMethod]
+		public void TableExtensionTests_InsertOrMergeEntity_CreatesMissingTable()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+
+			table.InsertOrMergeEntity(entity);
+
+			Assert.IsTrue(table.Exists());
+		}
+
+		[TestMethod]
 		public async Task TableExtensionTests_InsertOrMergeEntityAsync_InsertsOk()
 		{
 			var entity = new TestTableEntity();
@@ -219,6 +329,27 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(entity.TestNullableByte, storedEntity.TestNullableByte);
 			Assert.AreEqual(entity.TestEnum, storedEntity.TestEnum);
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
+		}
+
+		[TestMethod]
+		public async Task TableExtensionTests_InsertOrMergeEntityAsync_CreatesMissingTable()
+		{
+			var entity = new TestTableEntity();
+			entity.PartitionKey = System.Guid.NewGuid().ToString();
+			entity.RowKey = System.Guid.NewGuid().ToString();
+			entity.TestNullableByte = 1;
+			entity.TestEnum = TestEnum.TestEnumValue;
+			entity.NullableTestEnum = TestEnum.TestEnumValue2;
+
+			var account = CloudStorageAccount.Parse("UseDevelopmentStorage=true");
+			var tableClient = account.CreateCloudTableClient();
+			var table = tableClient.GetTableReference("TestEntities");
+			table.DeleteIfExists();
+
+			await table.InsertOrMergeEntityAsync(entity);
+
+			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
+			Assert.IsTrue(await table.ExistsAsync());
 		}
 
 		[TestMethod]
@@ -285,6 +416,10 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(entity.NullableTestEnum, storedEntity.NullableTestEnum);
 		}
 
+		#endregion
+
+		#region Delete
+
 		[TestMethod]
 		public void TableExtensionTests_DeleteEntity_DeletesOk()
 		{
@@ -331,6 +466,10 @@ namespace Cerulean.Storage.Tests
 			var storedEntity = await table.RetrieveEntityAsync<TestTableEntity>(entity);
 			Assert.IsNull(storedEntity);
 		}
+
+		#endregion
+
+		#region MergeEntity
 
 		[TestMethod]
 		public void TableExtensionTests_MergeEntity_MergeOk()
@@ -395,6 +534,10 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(TestEnum.TestEnumValue2, storedEntity.NullableTestEnum);
 		}
 
+		#endregion
+
+		#region ReplaceEntity
+
 		[TestMethod]
 		public void TableExtensionTests_ReplaceEntity_ReplacesOk()
 		{
@@ -457,6 +600,10 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(TestEnum.None, storedEntity.TestEnum);
 			Assert.AreEqual(null, storedEntity.NullableTestEnum);
 		}
+
+		#endregion
+
+		#region RetrieveEntity
 
 		[TestMethod]
 		public void TableExtensionTests_RetrieveEntity_RetrievesFromExistingEntity()
@@ -605,6 +752,8 @@ namespace Cerulean.Storage.Tests
 			Assert.AreEqual(entity.TestNullableInt64, entity.TestNullableInt64);
 			Assert.AreEqual(entity.TestNullableSingle, entity.TestNullableSingle);
 		}
+
+		#endregion
 
 	}
 }
