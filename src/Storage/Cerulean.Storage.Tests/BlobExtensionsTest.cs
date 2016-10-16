@@ -9,6 +9,8 @@ using Microsoft.WindowsAzure.Storage;
 
 namespace Cerulean.Storage.Tests
 {
+	// NOTE: These tests require the Azure storage emulator to be started before being run.
+
 	[TestClass]
 	public class BlobExtensionsTest
 	{
