@@ -3,6 +3,8 @@
 ## What is it ?
 A set of libraries for simplifying various activities in Microsoft Azure.
 
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Yortw/Cerulean.Storage/blob/master/LICENSE.md) 
+
 ## Supported Platforms
 Currently;
 

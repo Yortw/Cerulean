@@ -4,8 +4,8 @@
         <id>Cerulean.Storage</id>
         <version>1.0.0.0</version>
         <title>Cerulean.Storage</title>
-        <authors>Troy Willmot</authors>
-        <owners>Yortw</owners>
+        <authors>Yortw</authors>
+        <owners>Troy Willmot</owners>
         <licenseUrl>https://github.com/Yortw/Cerulean/blob/master/LICENSE.md</licenseUrl>
         <projectUrl>https://github.com/Yortw/Cerulean</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/Yortw/Cerulean/master/CeruleanIcon.png</iconUrl>
